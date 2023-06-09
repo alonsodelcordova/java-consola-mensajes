@@ -6,19 +6,22 @@ import java.sql.SQLException;
 
 public class Conexion {
     
-    public Connection conectDB(){
-        Connection cn = null;
+    private static Connection connection;
+    
+    public static Connection conectDB(){
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mensajes_app","root","");
-            if(cn!=null){
-                System.out.println("Conectado");
+            if(connection==null || connection.isClosed()){
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mensajes_app","root","");
+                if(connection!=null){
+                    System.out.println("Conectado a DB");
+                }
             }
         }catch(SQLException e){
             System.out.println("Error");
         } catch (ClassNotFoundException ex) {
             System.out.println("Errpr"+ex.getMessage());
         }
-        return cn;
+        return connection;
     }
 }
