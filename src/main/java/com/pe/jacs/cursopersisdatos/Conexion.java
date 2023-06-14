@@ -20,7 +20,7 @@ public class Conexion {
         }catch(SQLException e){
             System.out.println("Error");
         } catch (ClassNotFoundException ex) {
-            System.out.println("Errpr"+ex.getMessage());
+            System.out.println("Error"+ex.getMessage());
         }
         return connection;
     }
